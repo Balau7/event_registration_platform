@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1.0, minimum-scale=1.0" >
+    <title>Tickets</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/tickets.css">
+</head>
+<body>
+
+<div id="eventsContainer"></div>
+<header class="text-white p-4">
+    <div class="container">
+        <!-- header with logo, search and dropdowns -->
+        <div class="d-flex justify-content-between align-items-center">
+            <a class="navbar-brand text-white" href="homepage.html">Events.com</a>
+
+            <form class="d-flex w-50">
+                <input class="form-control me-2" type="search" placeholder="Search events, places..." aria-label="Search">
+                <button class="btn btn-outline-light" type="submit">Search</button>
+            </form>
+
+
+            <div class="dropdown">
+                <button class="btn btn-outline-light dropdown-toggle" type="button" id="cityDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                    Choose Section
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="cityDropdown">
+                    <li><a href="intro.html">Home</a></li>
+                    <li><a href="events.html">Current Events</a></li>
+                    <li><a href="categories.html">Categories</a></li>
+                    <li><a href="tickets.html">Tickets</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                    <li><a href="login.html">Log in</a></li>
+                </ul>
+            </div>
+
+
+            <div class="dropdown ms-3">
+                <button class="btn btn-outline-light dropdown-toggle" type="button" id="loginDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="fas fa-user"></i> Account
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="loginDropdown">
+                    <li><a class="dropdown-item" href="#" id="openAccountEditor">My Account</a></li>
+                    <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#favoritesModal">My Events</a></li>
+                    <li><a class="dropdown-item" href="#" id="openPasswordModal">Change Password</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item" href="login.html">Login</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- upcoming event cards -->
+<section class="container my-5">
+    <h1 class="text-center mb-5">Upcoming Events</h1>
+    <div class="row" id="eventCardsContainer">
+
+        <div class="col-12 col-sm-6 col-md-4 mb-4">
+            <div class="card">
+                <img src="https://ortcom.kz/cache/imagine/main_page_full/uploads/posts/62b/ecf/e96/62becfe9667f4533869175.jpg" class="card-img-top" alt="Event Image">
+                <div class="card-body">
+                    <h5 class="card-title">Live Concert</h5>
+                    <p class="card-text">Join us for a thrilling live concert featuring the best artists from around the world.</p>
+                    <p class="card-price">$25</p>
+                    <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ticketModal">Get Tickets</a>
+
+                    <a href="#" class="favorite-icon" onclick="toggleFavorite(this)">
+                        <i class="fas fa-heart"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-12 col-sm-6 col-md-4 mb-4">
+
+            <div class="card">
+                <img src="../img/five-senses-collage.jpg" class="card-img-top" alt="Event Image">
+                <div class="card-body">
+                    <h5 class="card-title">Art Exhibition</h5>
+                    <p class="card-text">Explore a variety of artworks from international artists in this exclusive exhibition.</p>
+                    <p class="card-price">$25</p>
+                    <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ticketModal">Get Tickets</a>
+
+                    <a href="#" class="favorite-icon" onclick="toggleFavorite(this)">
+                        <i class="fas fa-heart"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-12 col-sm-6 col-md-4 mb-4">
+            <div class="card">
+                <img src="../img/space-mission-control.jpg" class="card-img-top" alt="Event Image">
+                <div class="card-body">
+                    <h5 class="card-title">Tech Conference</h5>
+                    <p class="card-text">Join industry leaders and innovators at the biggest tech conference of the year.</p>
+                    <p class="card-price">$25</p>
+                    <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ticketModal">Get Tickets</a>
+
+                    <a href="#" class="favorite-icon" onclick="toggleFavorite(this)">
+                        <i class="fas fa-heart"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!--fav-->
+<div class="modal fade" id="favoritesModal" tabindex="-1" aria-labelledby="favoritesModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content bg-dark text-white">
+            <div class="modal-header">
+                <h5 class="modal-title" id="favoritesModalLabel">My Favorite Events</h5>
+                <button type="button" class="btn-close bg-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="favoritesList">
+                <p>No favorite events yet.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="ticketModal" tabindex="-1" aria-labelledby="ticketModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="ticketModalLabel">Live Concert Details</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+
+                <h3>Event: Live Concert</h3>
+                <p><strong>Date:</strong> 30th June, 2025</p>
+                <p><strong>Time:</strong> 8:00 PM - 11:00 PM</p>
+                <p><strong>Location:</strong> Royal Concert Hall, Sydney</p>
+                <p><strong>Description:</strong> Join us for an unforgettable night of music and excitement! We have world-class artists and performers ready to blow your mind. Don’t miss this once-in-a-lifetime event!</p>
+
+
+                <h4 class="text-danger">Price: $25</h4>
+
+
+                <form>
+                    <div class="mb-3">
+                        <label for="numberOfTickets" class="form-label">Number of Tickets</label>
+                        <input type="number" class="form-control" id="numberOfTickets" value="1" min="1">
+                    </div>
+                    <div class="mb-3">
+                        <label for="totalPrice" class="form-label">Total Price</label>
+                        <input type="text" class="form-control" id="totalPrice" value="$25" disabled>
+                    </div>
+                    <div id="promoSection" class="mb-3">
+                        <label for="promoInput" class="form-label">Promo Code</label>
+                        <input type="text" id="promoInput" class="form-control" placeholder="Enter promo code">
+                        <button type="button" id="applyPromoButton" class="btn btn-warning mt-2 w-100">Apply Promo Code</button>
+                        <p id="promoTimer" class="mt-2 text-center"></p>
+                    </div>
+                    <div id="paymentSection" class="mb-3">
+                        <label for="paymentMethod" class="form-label">Payment Method</label>
+                        <select id="paymentMethod" class="form-select">
+                        </select>
+                    </div>
+
+                    <div id="paymentDetails" class="mb-3" style="display: none;">
+                        <label for="cardNumber" class="form-label">Card Number</label>
+                        <input type="text" id="cardNumber" class="form-control" placeholder="1234 5678 9012 3456">
+
+                        <label for="cardExpiry" class="form-label mt-2">Expiry Date</label>
+                        <input type="text" id="cardExpiry" class="form-control" placeholder="MM/YY">
+
+                        <label for="cardCVV" class="form-label mt-2">CVV</label>
+                        <input type="text" id="cardCVV" class="form-control" placeholder="123">
+                    </div>
+
+                    <button type="submit" class="btn btn-success w-100">Pay Now</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- event carousel -->
+<div id="carouselExample" class="carousel slide carousel-fade" data-bs-ride="carousel">
+
+    <div class="carousel-indicators">
+        <button type="button" data-bs-target="#carouselExample" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#carouselExample" data-bs-slide-to="1" aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#carouselExample" data-bs-slide-to="2" aria-label="Slide 3"></button>
+    </div>
+
+
+    <div class="carousel-inner">
+
+        <div class="carousel-item active">
+            <img src="../img/carusel0.jpg" class="d-block w-100" alt="Sunset Over the City"/>
+            <div class="carousel-caption d-none d-md-block">
+                <h5>Open new horizons with our list of events</h5>
+                <p>Join the most exciting and exclusive events in town. Book your tickets today!</p>
+                <button type="button" class="btn btn-secondary addTicketCard">Add new Event</button>
+            </div>
+        </div>
+
+        <div class="carousel-item">
+            <img src="../img/carusel2.jpg" class="d-block w-100" alt="Canyon at Night"/>
+            <div class="carousel-caption d-none d-md-block">
+                <h5>Dive into the world of art with our unique exhibitions</h5>
+                <p>Explore a variety of stunning artworks from talented artists. Get your tickets now!</p>
+                <button type="button" class="btn btn-secondary addTicketCard">Add new Event</button>
+            </div>
+        </div>
+
+        <div class="carousel-item">
+            <img src="../img/carusel3.jpg" class="d-block w-100" alt="Cliff Above a Stormy Sea"/>
+            <div class="carousel-caption d-none d-md-block">
+                <h5>Be at the center of technology with the most relevant conferences</h5>
+                <p>Attend the most influential tech conference of the year. Secure your spot today!</p>
+                <button type="button" class="btn btn-secondary addTicketCard">Add new Event</button>
+            </div>
+        </div>
+    </div>
+
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+</div>
+<!-- profile modal -->
+<div class="modal fade" id="accountModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content p-4">
+            <h5>My Profile</h5>
+            <form id="accountForm">
+                <div class="mb-3">
+                    <label for="userName" class="form-label">Full Name</label>
+                    <input type="text" class="form-control" id="userName" placeholder="Enter name">
+                </div>
+                <div class="mb-3">
+                    <label for="userEmail" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="userEmail" placeholder="Enter email">
+                </div>
+                <button type="submit" class="btn btn-primary w-100">Save Changes</button>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- password change modal -->
+<div class="modal fade" id="passwordModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content p-4">
+            <h5 class="mb-3">Change Password</h5>
+            <form id="passwordForm">
+                <div class="mb-3">
+                    <label for="oldPassword" class="form-label">Current Password</label>
+                    <input type="password" class="form-control" id="oldPassword" placeholder="Enter current password" required>
+                </div>
+                <div class="mb-3">
+                    <label for="newPassword" class="form-label">New Password</label>
+                    <input type="password" class="form-control" id="newPassword" placeholder="Enter new password" required>
+                </div>
+                <div class="mb-3">
+                    <label for="confirmPassword" class="form-label">Confirm New Password</label>
+                    <input type="password" class="form-control" id="confirmPassword" placeholder="Confirm new password" required>
+                </div>
+                <div class="mb-3">
+                    <button type="button" class="btn btn-secondary w-100" id="sendResetLink">Send Reset Link to Email</button>
+                </div>
+                <button type="submit" class="btn btn-primary w-100">Save New Password</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div id="eventsSearchResult" style="display:none;"></div>
+<!-- footer with links and language switcher -->
+<footer>
+    <p>Questions? Contact us.</p>
+    <div class="links">
+        <ul id="faq-list">
+            <li>FAQ</li>
+            <li>Help Center</li>
+            <li>Account</li>
+            <li>Media Center</li>
+            <li>Investor Relations</li>
+            <li>Jobs</li>
+            <li>Terms of Use</li>
+            <li>Privacy</li>
+            <li>Cookie Preferences</li>
+            <li>Corporate Information</li>
+            <li>Contact Us</li>
+            <li>Speed Test</li>
+            <li>Legal Notices</li>
+        </ul>
+        <div class="language" id="language-btn">
+            <i class="fas fa-globe"></i> English
+            <i class="fas fa-sort-down lg"></i>
+            <div class="dropdown-list">
+                <ul class="" id="language-dropdown">
+                    <li>Қазақ</li>
+                    <li>English</li>
+                </ul>
+            </div>
+        </div>
+        <p>Events.com</p>
+    </div>
+</footer>
+<!-- copyright footer -->
+<footer class="bg-dark text-white py-4">
+    <div class="container text-center">
+        <p>&copy; 2025 Events.com | All Rights Reserved</p>
+    </div>
+</footer>
+
+<script type="text/javascript">
+    var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+    (function(){
+        var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+        s1.async=true;
+        s1.src='https://embed.tawk.to/683d6fd1e8c2fb1910b283ba/1isnvpj97';
+        s1.charset='UTF-8';
+        s1.setAttribute('crossorigin','*');
+        s0.parentNode.insertBefore(s1,s0);
+    })();
+</script>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../js/tickets.js"></script>
+
+</body>
+</html>
+</body>
+</html>
