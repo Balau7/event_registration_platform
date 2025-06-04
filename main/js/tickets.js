@@ -171,19 +171,6 @@ document.addEventListener("DOMContentLoaded", function() {
     }
     simulateAsync(message => console.log(message));
 
-
-    // 4th task: adding interactivity with loops
-
-    const allCards = document.querySelectorAll('.card');
-
-    for (let i = 0; i < allCards.length; i++) {
-        if (i % 2 === 0) {
-            allCards[i].style.backgroundColor = 'rgba(0, 0, 0, 0.05)';
-        } else {
-            allCards[i].style.backgroundColor = 'rgba(72, 209, 204, 0.15)';
-        }
-    }
-
     //copyright
     const languageDropdown = document.getElementById("language-btn");
     const faqListItems = document.querySelectorAll("#faq-list li");
