@@ -119,20 +119,21 @@ document.addEventListener("DOMContentLoaded", function() {
         startPromoTimer();
     });
 
-    const payButton = document.querySelector('#ticketModal form button[type="submit"]');
-
     payButton.addEventListener("click", function(event) {
         event.preventDefault();
 
-        let isLoggedIn = false;
+        const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
 
         if (!isLoggedIn) {
             alert("❗ You must be logged in to complete the purchase.");
             window.location.href = "login.html";
         } else {
-
-            const toast = new bootstrap.Toast(purchaseToastEl);
-            toast.show();
+            alert("🎉 Congratulations! Your ticket purchase was successful.");
+            const purchaseToastEl = document.getElementById("purchaseToast");
+            if (purchaseToastEl) {
+                const toast = new bootstrap.Toast(purchaseToastEl);
+                toast.show();
+            }
         }
     });
 
@@ -406,4 +407,3 @@ document.getElementById("passwordForm").addEventListener("submit", function (e) 
     alert("New password saved.");
     bootstrap.Modal.getInstance(document.getElementById("passwordModal")).hide();
 });
-localStorage.setItem("userPassword", password);
